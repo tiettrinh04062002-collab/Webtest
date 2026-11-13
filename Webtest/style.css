@@ -39,7 +39,7 @@ body {
   gap: 20px;
   padding: 25px clamp(18px, 4vw, 58px);
   color: white;
-  background: linear-gradient(115deg, #102d48, #1d527b);
+  background: url(https://file.hoaphat.com.vn/hoaphat-com-vn/2020/03/web-thep-1920x600px-01.png);
 }
 
 .eyebrow {
