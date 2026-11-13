@@ -29,7 +29,7 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--ink);
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", 'Times New Roman', Times, serif, sans-serif;
 }
 
 .topbar {
