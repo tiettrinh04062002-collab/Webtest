@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<title>Quản lý thông số Relay HPDQ1</title>
+
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 25px;
+    background: #f4f6f9;
+}
+
+h2 {
+    color: #17365d;
+}
+
+select, input {
+    padding: 10px;
+    margin: 10px 5px 15px 0;
+}
+
+#tableContainer {
+    overflow: auto;
+    max-height: 75vh;
+    background: white;
+    border: 1px solid #ccc;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 100%;
+    font-size: 13px;
+}
+
+td, th {
+    border: 1px solid #bbb;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+tr:first-child {
+    background: #dce6f1;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>BẢNG THÔNG SỐ CÀI ĐẶT RƠ LE HPDQ1</h2>
+
+<label>Chọn file Excel:</label>
+<input type="file" id="excelFile" accept=".xlsx,.xls">
+
+<br>
+
+<label>Chọn khu vực:</label>
+<select id="sheetSelect" disabled>
+    <option>Chưa có dữ liệu</option>
+</select>
+
+<div id="tableContainer">
+    Vui lòng tải file Excel lên.
+</div>
+
+<script>
+
+let workbook;
+
+document.getElementById("excelFile")
+.addEventListener("change", function(e) {
+
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+
+        workbook = XLSX.read(event.target.result, {
+            type: "array"
+        });
+
+        const select = document.getElementById("sheetSelect");
+
+        select.innerHTML = "";
+
+        workbook.SheetNames.forEach(name => {
+
+            const option = document.createElement("option");
+
+            option.value = name;
+            option.textContent = name;
+
+            select.appendChild(option);
+
+        });
+
+        select.disabled = false;
+
+        displaySheet(workbook.SheetNames[0]);
+
+    };
+
+    reader.readAsArrayBuffer(file);
+
+});
+
+function displaySheet(sheetName) {
+
+    const sheet = workbook.Sheets[sheetName];
+
+    const html = XLSX.utils.sheet_to_html(sheet);
+
+    document.getElementById("tableContainer").innerHTML = html;
+
+}
+
+document.getElementById("sheetSelect")
+.addEventListener("change", function() {
+
+    displaySheet(this.value);
+
+});
+
+</script>
+    <a href="./bang.html">home</a>
+    <a href="./index.html">contact</a>
+    <a href="./abou.html">about</a>
+    <a href="./web1.html">about</a>
+</body>
+</html>

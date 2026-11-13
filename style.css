@@ -1,0 +1,19 @@
+body{
+    background-image: url(./ap;ication/image.png);
+}
+h1{
+    /* màu chữ */
+    color: aqua;
+    /* kiểu chữ */
+    font-style: italic;
+    /* font chữ */
+    font-family: 'Times New Roman', Times, serif;
+    /* chuyển đổi viết hoa viết thường */
+    text-transform: capitalize;
+    /* căn giữa */
+    text-align: center;
+    font-size: 40px;
+}
+h2{
+    text-align: center;
+}

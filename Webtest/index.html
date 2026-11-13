@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tra cứu thông số cài đặt rơ-le | HPDQ1</title>
+  <!-- NẠP CSS: Toàn bộ màu sắc, bố cục và kiểu hiển thị nằm trong style.css -->
+  <link rel="stylesheet" href="style.css">
+  <!-- THƯ VIỆN SHEETJS: JavaScript dùng thư viện này để đọc nội dung file Excel .xlsx -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <!-- NẠP JS: Các chức năng đọc Excel, chọn sheet, tìm kiếm nằm trong script.js -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <img src="./image.png" alt="">
+    <div>
+      <p class="eyebrow">HÒA PHÁT DUNG QUẤT · HPDQ1</p>
+      <h1>Tra cứu thông số cài đặt rơ-le</h1>
+      <p class="subtitle">Xem dữ liệu từ workbook Excel theo từng khu vực / nhà máy</p>
+    </div>
+    <div class="status" id="statusBadge">Chưa nạp dữ liệu</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <div class="section-heading">
+        <div>
+          <h2>Nguồn dữ liệu</h2>
+          <p>Chọn workbook Excel cần xem</p>
+        </div>
+      </div>
+      <!-- INPUT FILE: Người dùng chọn file Excel từ máy tính; không tải file lên Internet -->
+      <label class="file-picker" for="excelFile">
+        <span class="file-icon">↥</span>
+        <span><strong>Chọn file Excel (.xlsx)</strong><small id="fileName">Chưa chọn file</small></span>
+        <input id="excelFile" type="file" accept=".xlsx,.xls">
+      </label>
+
+      <div class="field">
+        <label for="sheetSelect">Khu vực / Sheet Excel</label>
+        <!-- SELECT SHEET: Danh sách này được JavaScript tạo tự động từ tên sheet trong workbook -->
+        <select id="sheetSelect" disabled>
+          <option value="">Chưa có dữ liệu</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="searchInput">Tìm trong sheet đang mở</label>
+        <!-- SEARCH: Lọc các hàng đang hiển thị theo nội dung người dùng nhập -->
+        <input id="searchInput" type="search" placeholder="Nhập mã tủ, tên thiết bị, thông số..." disabled>
+      </div>
+      <div class="button-row">
+        <button id="clearSearch" class="button secondary" type="button" disabled>Xóa tìm kiếm</button>
+        <button id="resetView" class="button secondary" type="button" disabled>Hiện tất cả hàng</button>
+      </div>
+      <p class="privacy-note">File được đọc trực tiếp trong trình duyệt trên máy đang sử dụng. Phiên bản này không gửi dữ liệu Excel lên máy chủ.</p>
+    </section>
+
+    <section class="content">
+      <section class="summary-grid">
+        <article class="summary-card"><span>Sheet hiện tại</span><strong id="currentSheet">—</strong></article>
+        <article class="summary-card"><span>Số hàng hiển thị</span><strong id="visibleRows">—</strong></article>
+        <article class="summary-card"><span>Tổng số sheet</span><strong id="sheetCount">—</strong></article>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="table-heading">
+          <div>
+            <h2 id="tableTitle">Bảng dữ liệu Excel</h2>
+            <p id="tableHint">Chọn file Excel để bắt đầu tra cứu.</p>
+          </div>
+          <span class="table-tag">READ ONLY · CHỈ XEM</span>
+        </div>
+        <!-- TABLE CONTAINER: JavaScript chuyển sheet Excel thành bảng HTML và đặt vào vùng này -->
+        <div id="tableContainer" class="table-container">
+          <div class="empty-state">
+            <div class="empty-icon">▤</div>
+            <strong>Chưa có dữ liệu</strong>
+            <p>Chọn file “BẢNG THÔNG SỐ CÀI ĐẶT RƠ LE HPDQ1 1.xlsx” để hiển thị các sheet.</p>
+          </div>
+        </div>
+      </section>
+      <p class="footer-note">Lưu ý: Website phục vụ tra cứu, không thay thế bản Excel gốc hoặc quy trình phê duyệt / kiểm soát thay đổi thông số bảo vệ.</p>
+    </section>
+  </main>
+</body>
+</html>
